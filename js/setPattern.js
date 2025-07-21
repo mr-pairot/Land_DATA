@@ -24,7 +24,7 @@ function getPolygonStyle(feature) {
   if (val === "#N/A" || isNaN(val)) {
     return {
       color: "gray",
-      weight: 2,
+      weight: 1,
       opacity: 0.5,
       fillColor: "gray",
       fillOpacity: 0.5,
@@ -42,7 +42,7 @@ function getPolygonStyle(feature) {
 
   return {
     color: style.color,
-    weight: 2,
+    weight: 1,
     opacity: 1,
     fillColor: style.fillColor,
     fillOpacity: 0.5,
