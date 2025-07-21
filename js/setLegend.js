@@ -6,7 +6,7 @@ function addLegend(map) {
   legend.onAdd = function () {
     const div = L.DomUtil.create("div", "info legend");
 
-    let html = `<strong>ข้อมูลพื้นที่เวนคืน วันที่ 01/07/2568</strong><br>`;
+    let html = `<strong>ข้อมูลพื้นที่เวนคืน วันที่ 01/06/2568</strong><br>`;
     
     // ตัวอย่างข้อมูลจำลอง (mock) เพื่อดึง style
     const items = [
