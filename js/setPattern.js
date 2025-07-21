@@ -25,7 +25,7 @@ function getPolygonStyle(feature) {
     return {
       color: "gray",
       weight: 2,
-      opacity: 1,
+      opacity: 0.5,
       fillColor: "gray",
       fillOpacity: 0.5,
       dashArray: "5, 5"
