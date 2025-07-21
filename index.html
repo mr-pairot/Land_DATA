@@ -56,19 +56,20 @@
 
     // โหลด polygon จาก KML
     const kmlLayer = omnivore.kml("data/Polygon.kml", null, L.geoJSON(null, {
-      style: function (feature) {
-        return getPolygonStyle(feature);
-      }
+          style: getPolygonStyle
     }))
     .on("ready", function () {
-      map.fitBounds(kmlLayer.getBounds());
+          map.fitBounds(kmlLayer.getBounds());
+
+    const features = kmlLayer.toGeoJSON().features;
+    addLegend(map, features);  // ← ส่งข้อมูลเข้า legend
     })
     .addTo(map);
   </script>
 
   <!-- กำหนด legend -->
   <script src="js/setLegend.js"></script>
-  <script>  addLegend(map); </script>
+  <script>  addLegend(map, features); </script>
   
 </body>
 </html>
