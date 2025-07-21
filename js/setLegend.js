@@ -4,7 +4,7 @@ function addLegend(map, features) {
   legend.onAdd = function () {
     const div = L.DomUtil.create("div", "info legend");
 
-    const date = features?.[0]?.properties?.update_date || "ไม่ระบุวันที่";
+    const date = features?.[0]?.properties?.update_date || "<ไม่ระบุวันที่>";
 
     div.innerHTML = `
       <strong>ข้อมูลพื้นที่เวนคืน วันที่ ${date}</strong><br>
