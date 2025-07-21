@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Leaflet KML Polygon</title>
+  <link rel="icon" href="img/favicon.ico" />
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -13,26 +14,22 @@
       width: 100%;
       height: 100vh;
     }
-   
-  .legend {
-    background: white;
-    padding: 10px;
-    font-size: 14px;
-    line-height: 1.5;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  }
-
-  .legend i {
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    margin-right: 6px;
-    vertical-align: middle;
-    border: 1px solid #999;
-  }
-</style>
-
-  
+    .legend {
+      background: white;
+      padding: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .legend i {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      margin-right: 6px;
+      vertical-align: middle;
+      border: 1px solid #999;
+    }
+  </style>
 </head>
 <body>
   <div id="map"></div>
@@ -45,33 +42,61 @@
 
   <!-- setPattern.js -->
   <script src="js/setPattern.js"></script>
-  
-  <!-- กำหนด legend -->
+
+  <!-- setLegend.js -->
   <script src="js/setLegend.js"></script>
 
   <script>
-    // สร้างแผนที่
+    // แผนที่
     const map = L.map("map", {
       center: [16.12, 103.68],
-      zoom: 13,
-      layers: [baseMaps.OpenStreetMap]
+      zoom: 13
     });
+
+    // Base map
+    const baseMaps = {
+      "OpenStreetMap": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map)
+    };
+
+    // ตัวแปรเก็บ legend เพื่อลบภายหลัง
+    let currentLegend = null;
 
     // โหลด polygon จาก KML
     const kmlLayer = omnivore.kml("data/Polygon.kml", null, L.geoJSON(null, {
-          style: getPolygonStyle
+      style: getPolygonStyle
     }))
     .on("ready", function () {
-          map.fitBounds(kmlLayer.getBounds());
+      const features = kmlLayer.toGeoJSON().features;
 
-    const features = kmlLayer.toGeoJSON().features;
-    addLegend(map, features);  // ← ส่งข้อมูลเข้า legend
-    })
-    .addTo(map);
+      // สร้าง layerGroup สำหรับ polygon
+      const polygonGroup = L.layerGroup([kmlLayer]);
+
+      // Event: เมื่อลงแผนที่
+      polygonGroup.on("add", function () {
+        map.fitBounds(kmlLayer.getBounds());
+        if (!currentLegend) {
+          currentLegend = addLegend(map, features);
+        }
+      });
+
+      // Event: เมื่อลบออก
+      polygonGroup.on("remove", function () {
+        if (currentLegend) {
+          map.removeControl(currentLegend);
+          currentLegend = null;
+        }
+      });
+
+      // Overlay map
+      const overlayMaps = {
+        "พื้นที่เวนคืน": polygonGroup
+      };
+
+      // Control Layer
+      L.control.layers(baseMaps, overlayMaps).addTo(map);
+    });
   </script>
-
-
-
-  
 </body>
 </html>
