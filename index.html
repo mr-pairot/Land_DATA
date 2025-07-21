@@ -40,63 +40,61 @@
   <!-- omnivore for KML -->
   <script src="https://unpkg.com/leaflet-omnivore@0.3.4/leaflet-omnivore.min.js"></script>
 
-  <!-- setPattern.js -->
+  <!-- setPattern.js (ต้องมีฟังก์ชัน getPolygonStyle) -->
   <script src="js/setPattern.js"></script>
 
-  <!-- setLegend.js -->
+  <!-- setLegend.js (ต้องคืนค่า legend control ด้วย return) -->
   <script src="js/setLegend.js"></script>
 
   <script>
-    // แผนที่
+    // สร้าง base map
+    const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    });
+
     const map = L.map("map", {
       center: [16.12, 103.68],
-      zoom: 13
+      zoom: 13,
+      layers: [osm] // ตั้งค่า base map ตอนเริ่ม
     });
 
-    // Base map
     const baseMaps = {
-      "OpenStreetMap": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-      }).addTo(map)
+      "OpenStreetMap": osm
     };
 
-    // ตัวแปรเก็บ legend เพื่อลบภายหลัง
     let currentLegend = null;
 
-    // โหลด polygon จาก KML
+    // โหลด polygon.kml และสร้างเป็น LayerGroup
     const kmlLayer = omnivore.kml("data/Polygon.kml", null, L.geoJSON(null, {
       style: getPolygonStyle
-    }))
-    .on("ready", function () {
-      const features = kmlLayer.toGeoJSON().features;
+    }));
 
-      // สร้าง layerGroup สำหรับ polygon
-      const polygonGroup = L.layerGroup([kmlLayer]);
+    const polygonGroup = L.layerGroup();
 
-      // Event: เมื่อลงแผนที่
-      polygonGroup.on("add", function () {
-        map.fitBounds(kmlLayer.getBounds());
-        if (!currentLegend) {
-          currentLegend = addLegend(map, features);
-        }
-      });
-
-      // Event: เมื่อลบออก
-      polygonGroup.on("remove", function () {
-        if (currentLegend) {
-          map.removeControl(currentLegend);
-          currentLegend = null;
-        }
-      });
-
-      // Overlay map
-      const overlayMaps = {
-        "พื้นที่เวนคืน": polygonGroup
-      };
-
-      // Control Layer
-      L.control.layers(baseMaps, overlayMaps).addTo(map);
+    kmlLayer.on("ready", function () {
+      polygonGroup.addLayer(kmlLayer);
     });
+
+    polygonGroup.on("add", function () {
+      map.fitBounds(kmlLayer.getBounds());
+      const features = kmlLayer.toGeoJSON().features;
+      if (!currentLegend) {
+        currentLegend = addLegend(map, features);
+      }
+    });
+
+    polygonGroup.on("remove", function () {
+      if (currentLegend) {
+        map.removeControl(currentLegend);
+        currentLegend = null;
+      }
+    });
+
+    const overlayMaps = {
+      "พื้นที่เวนคืน": polygonGroup
+    };
+
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
   </script>
 </body>
 </html>
