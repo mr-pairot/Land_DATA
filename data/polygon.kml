@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="pay_in_row_status_km0191_240408" id="pay_in_row_status_km0191_240408">
+	<SimpleField name="Code" type="string"></SimpleField>
+	<SimpleField name="Area_sqm" type="float"></SimpleField>
+	<SimpleField name="Status" type="string"></SimpleField>
+	<SimpleField name="Landpay14-" type="float"></SimpleField>
+	<SimpleField name="Work" type="float"></SimpleField>
+</Schema>
+<Folder><name>pay_in_row_status_km0191_240408</name>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#pay_in_row_status_km0191_240408">
+		<SimpleData name="Code">ท2687</SimpleData>
+		<SimpleData name="Area_sqm">1979.146</SimpleData>
+		<SimpleData name="Status">ส่งมอบแล้ว</SimpleData>
+		<SimpleData name="Landpay14-">1</SimpleData>
+		<SimpleData name="Work">1</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>103.68720802024,16.1187792610731 103.687200830052,16.1191280189727 103.687981819444,16.1189825086001 103.687846,16.118928 103.687393,16.118754 103.68734079459,16.1187348809756 103.68720802024,16.1187792610731</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#pay_in_row_status_km0191_240408">
+		<SimpleData name="Code">ท1989.1</SimpleData>
+		<SimpleData name="Area_sqm">0.176</SimpleData>
+		<SimpleData name="Status">ส่งมอบแล้ว</SimpleData>
+		<SimpleData name="Landpay14-">1</SimpleData>
+		<SimpleData name="Work">1</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>103.518593907124,16.1163680300632 103.518593651333,16.1163667036089 103.51857294726,16.116375423382 103.518593907124,16.1163680300632</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#pay_in_row_status_km0191_240408">
+		<SimpleData name="Code">ท1660</SimpleData>
+		<SimpleData name="Area_sqm">4359.120</SimpleData>
+		<SimpleData name="Status">ส่งมอบแล้ว</SimpleData>
+		<SimpleData name="Landpay14-">1</SimpleData>
+		<SimpleData name="Work">1</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>103.407802627997,16.1317045018371 103.407850677955,16.1320731714861 103.407813263001,16.1321571408735 103.407942512883,16.1324651171891 103.408061862091,16.1324499689175 103.408082645047,16.1324462640913 103.408088316725,16.1324466111816 103.408247697106,16.1324263818661 103.408232485585,16.1321355864217 103.408271363123,16.1320115265111 103.408243133009,16.1318587620592 103.408247602971,16.1316416473243 103.408241523904,16.1315177332766 103.407796386723,16.1315743012884 103.407802627997,16.1317045018371</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+<Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#pay_in_row_status_km0191_240408">
+		<SimpleData name="Landpay14-">0</SimpleData>
+		<SimpleData name="Work">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry></MultiGeometry>
+  </Placemark>
+</Folder>
+</Document></kml>
